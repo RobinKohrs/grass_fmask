@@ -2,194 +2,95 @@
 #
 ##############################################################################
 #
-# MODULE:       fmask
+# MODULE:       r.fmask
 #
-# AUTHOR(S):    martin, modified by robin
+# AUTHOR(S):    Veronica Grupp
+#               Florian 
+#               Robin Kohrs
 #
-# PURPOSE:      NDVI TGRASS version 1
+# PURPOSE:      Implement fmask algorithm for cloud detection in GRASS GIS
 #
-# DATE:         Sat Feb  14 
+# DATE:         Sat Mar  7 
 #
 ##############################################################################
 
 #%module
-#% description: Sentinel Download
-#%end                
+#% description: Implement fmask algorithm for cloud detection in GRASS GIS
+#% keyword: raster
+#% keyword: fmask
+#% keyword: cloud detection
+#%end
 #%option G_OPT_F_INPUT
-#% key: path_user_hub
-#% description: Username, Password for Copernicus Hub
-#% required: yes
-#%end
-#%option G_OPT_F_OUTPUT
-#% key: outdir
-#% description: Output-Directory for Sentinel-2 Scenes
-#% required: yes
-#%end
-#%option G_OPT_V_INPUT
-#% key: roi
-#% description: Area of Interest
-#% required: yes
+#% key: settings
+#% label: full path to fmask paramters
 #%end
 #%option
-#% key: clouds
-#% description: max coverage of clouds
+#% key: sensor
+#% type: integer
+#% description: Either Landsat8(1) or Sentinel2(2)
+#% options: 1,2
+#% required: no
 #%end
-#%option
-#% key: producttype
-#% description: Sentinel Producttype
+#%option G_OPT_R_OUTPUT
+#% key: output
+#% description: Name of output image 
 #% required: yes
-#%end
-#%option
-#% key: start
-#% description: start date
-#% required: yes
-#%end
-#%option
-#% key: end
-#% description: end date
-#% required: yes
-#%end
-#%option
-#% key: print
-#% description: print available scenes
-#%end
-#%option 
-#% key: mode
-#% required: yes
-#% description: Sentinel 2 Mode
 #%end
 
 
-import sys
+
+
 import os
-import atexit
 
-from grass.pygrass.modules import Module
-from grass.script import parser
-from grass.script.vector import vector_db_select
+import grass.script as grass
+from fmask import fmask as fm
+from fmask import config as cfg
+
+               
+
+def config(sensor, refband, terminfo):
+
+    """[create a function that creates an instance of a class FmaskConfig]
     
-def cleanup():
-    pass
+    Arguments:
+        sensor {integer} -- [either 1 or 2 for Landsat8 or Sentinel]
+    """ 
+    # create instance of that class
+    conf = cfg.FmaskConfig(sensor)
+
+    # set all the attributes
+    conf.setReflectiveBand = refband
+    conf.setThermalInfo = terminfo
 
 
-def downloadSentinel():
-    Module("i.sentinel.download",
-            settings = path_user_hub,
-            output = outdir,
-            map=roi,
-            clouds = clouds,
-            )
-  
-# def compute(b4, b8, msk, output):
 
-#     Module("g.region",
-#            overwrite = True,
-#            raster = msk,
-#            align = b4)
 
-#     Module("r.mask",
-#            overwrite = True,
-#            raster = msk)
+def filesnames():
 
-#     Module("i.vi",
-#            overwrite = True,
-#            red = b4,
-#            output = "ndvi",
-#            nir = b8)
-                
-#     recode_str="""-1:0.1:1
-# 0.1:0.5:2
-# 0.5:1:3"""
+    fnames = cfg.FmaskFilenames()
 
-#     Module("r.recode",
-#            overwrite = True,
-#            input = "ndvi",
-#            output = "ndvi_class",
-#            rules = "-",
-#            stdin_ = recode_str)
 
-#     colors_str="""1 grey
-# 2 255 255 0
-# 3 green"""
-#     Module("r.colors",
-#            map = "ndvi_class",
-#            rules = "-",
-#            stdin_ = colors_str)
-    
-#     Module("r.to.vect",
-#            flags = 'sv',
-#            overwrite = True,
-#            input = "ndvi_class",
-#            output = "ndvi_class",
-#            type = "area")
-
-#     Module("v.clean",
-#            overwrite = True,
-#            input = "ndvi_class",
-#            output = output,
-#            tool = "rmarea",
-#            threshold = options['threshold'])
-
-def stats(output, date, fd):
-    fd.write('-' * 80)
-    fd.write(os.linesep)
-    fd.write('NDVI class statistics ({0}: {1})'.format(output, date))
-    fd.write(os.linesep)
-    fd.write('-' * 80)
-    fd.write(os.linesep)
-    from subprocess import PIPE
-    ret = Module('v.report', map=output, option='area',
-                 stdout_=PIPE)
-    for line in ret.outputs.stdout.splitlines()[1:]: # skip first line (cat|label|area)
-        # parse line (eg. 1||2712850)
-        data = line.split('|')
-        cat = data[0]
-        area = float(data[-1])
-        fd.write('NDVI class {0}: {1:.1f} ha'.format(cat, area/1e4))
-        fd.write(os.linesep)
-
-    # v.to.rast: use -c flag for updating statistics if exists
-    Module('v.rast.stats', flags='c', map=output, raster='ndvi',
-           column_prefix='ndvi', method=['minimum','maximum','average'])
-    
-    data = vector_db_select(output)
-    for vals in data['values'].values():
-        # unfortunately we need to cast values by float
-        fd.write('NDVI class {0}: {1:.4f} (min) {2:.4f} (max) {3:.4f} (mean)'.format(
-            vals[0], float(vals[2]), float(vals[3]), float(vals[4])))
-        fd.write(os.linesep)
-        
 def main():
-    import grass.temporal as tgis
 
-    tgis.init()
+    print("im in main")
 
-    sp4 = tgis.open_old_stds(options['b4'], 'raster')
-    sp8 = tgis.open_old_stds(options['b8'], 'raster')
-    msk = tgis.open_old_stds(options['mask'], 'raster')
+    try:
+        from fmask import fmask as fm
+    except ImportError as e:
+         gs.fatal(_("Module requires sentinelsat library: {}").format(e))
+    try:
+        from fmask import config as cfg
+    except ImportError as e:
+        gs.fatal(_("Module requires pandas library: {}").format(e))
+    
 
-    idx = 1
-    fd = open(options['output'], 'w')
-    for item in sp4.get_registered_maps(columns='name,start_time'):
-        b4 = item[0]
-        date=item[1]
-        b8 = sp8.get_registered_maps(columns='name',
-                                     where="start_time = '{}'".format(date))[0][0]
-        ms = msk.get_registered_maps(columns='name',
-                                     where="start_time = '{}'".format(date))[0][0]
-        output = '{}_{}'.format(options['basename'], idx)
-        compute(b4, b8, ms, output)
-        stats(output, date, fd)
-        cleanup()
-        idx += 1
 
-    fd.close()
+
     
     return 0
 
 if __name__ == "__main__":
-    options, flags = parser()
-    sys.exit(main())
-
+    options, flags = grass.parser()
+    main()
 
 
