@@ -15,27 +15,61 @@
 ##############################################################################
 
 #%module
-#% description: Implement fmask algorithm for cloud detection in GRASS GIS
+#% description: fmask-algorithm for cloud detection in GRASS GIS
 #% keyword: raster
 #% keyword: fmask
 #% keyword: cloud detection
 #%end
-#%option G_OPT_F_INPUT
-#% key: settings
-#% label: full path to fmask paramters
+
+#%option G_OPT_M_DIR
+#% key: input
+#% description: path to directory (.save), where sentinel scenes are stored
+#% required: yes
 #%end
+
 #%option
 #% key: sensor
 #% type: integer
 #% description: Either Landsat8(1) or Sentinel2(2)
 #% options: 1,2
-#% required: no
-#%end
-#%option G_OPT_R_OUTPUT
-#% key: output
-#% description: Name of output image 
 #% required: yes
 #%end
+
+#%option
+#% key: cloudbuffer
+#% type: integer
+#% description: size of buffer in cloudlayer (in number of pixels)
+#% required: no
+#% answer: 5
+#%end
+
+#%option
+#% key: cloudbuffer
+#% type: integer
+#% description: size of buffer in shadowlayer (in number of pixels)
+#% required: no
+#% answer: 10
+#%end
+
+#%flag
+#% key: v
+#% description: print informative messages
+#%end
+
+#%option G_OPT_R_OUTPUT
+#% key: output_cl
+#% description: Name of output cloud mask
+#% required: yes
+#% guisection: Output
+#%end
+
+#%option G_OPT_R_OUTPUT
+#% key: output_sh
+#% description: Name of output shadow mask
+#% required: yes
+#% guisection: Output
+#%end
+
 
 
 
@@ -62,6 +96,8 @@ def config(sensor, refband, terminfo):
     conf.setReflectiveBand = refband
     conf.setThermalInfo = terminfo
 
+    
+
 
 
 
@@ -70,22 +106,18 @@ def filesnames():
     fnames = cfg.FmaskFilenames()
 
 
+
 def main():
 
-    print("im in main")
+    img  = options['input']   # name of input image
+    img_out = options['output_cl']  # name of output image 
 
     try:
         from fmask import fmask as fm
     except ImportError as e:
-         gs.fatal(_("Module requires sentinelsat library: {}").format(e))
-    try:
-        from fmask import config as cfg
-    except ImportError as e:
-        gs.fatal(_("Module requires pandas library: {}").format(e))
+        gs.message(_("you need to install the python fmask library first..."))
+        gs.fatal(_("Module requires fmask library: {}").format(e))
     
-
-
-
     
     return 0
 
