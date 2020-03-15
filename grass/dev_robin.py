@@ -28,26 +28,70 @@
 #% required: yes
 #%end
 
-#%option G_OPT_F_BIN_INPUT
-#% description: Full path to single .jp2 file
-#% required: no
-#% guisection: Input
+
+#%flag
+#% key: v
+#% description: print informative messages
+#% guisection: flags
 #%end
 
-#%option
-#% key: sensor
-#% type: integer
-#% description: Either Landsat8(1) or Sentinel2(2)
-#% options: 1,2
-#% required: no
+
+#%flag
+#% key: pr
+#% description: print informative messages
+#% guisection: flags
 #%end
 
-#%option
-#% key: cloudbuffer
-#% type: integer
-#% description: size of buffer in cloudlayer (in number of pixels)
-#% required: no
-#% answer: 5
+
+#%flag
+#% key: m
+#% description: mincloudsize in pixels
+#% answer: 0
+#% guisection: flags
+#%end
+
+#%flag
+#% key: c
+#% description: cloudbufferdistance in metres 
+#% answer: 150
+#% guisection: flags
+#%end
+
+#%flag
+#% key: s
+#% description: shadow buffer distance in metres
+#% answer: 300
+#% guisection: flags
+#%end
+
+#%flag
+#% key: t
+#% description: cloud probability threshold
+#% answer: 0.2
+#% guisection: flags
+#%end
+
+
+#%flag
+#% key: n
+#% description: threshold for nir reflectance (0-1)
+#% answer: 0.11
+#% guisection: flags
+#%end
+
+
+#%flag
+#% key: g
+#% description: threshold for green-band reflectance (0-1)
+#% answer: 0.1
+#% guisection: flags
+#%end
+
+#%flag
+#% key: p
+#% description: parallax-test
+#% answer: no
+#% guisection: flags
 #%end
 
 #%option
@@ -58,10 +102,6 @@
 #% answer: 10
 #%end
 
-#%flag
-#% key: v
-#% description: print informative messages
-#%end
 
 #%option G_OPT_BIN_OUTPUT
 #% key: output_cl
