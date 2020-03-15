@@ -22,9 +22,16 @@
 #%end
 
 #%option G_OPT_M_DIR
-#% key: input
+#% key: input_dir
+#% type: string
 #% description: path to directory (.save), where sentinel scenes are stored
 #% required: yes
+#%end
+
+#%option G_OPT_F_BIN_INPUT
+#% description: Full path to single .jp2 file
+#% required: no
+#% guisection: Input
 #%end
 
 #%option
@@ -32,7 +39,7 @@
 #% type: integer
 #% description: Either Landsat8(1) or Sentinel2(2)
 #% options: 1,2
-#% required: yes
+#% required: no
 #%end
 
 #%option
@@ -56,16 +63,9 @@
 #% description: print informative messages
 #%end
 
-#%option G_OPT_R_OUTPUT
+#%option G_OPT_BIN_OUTPUT
 #% key: output_cl
 #% description: Name of output cloud mask
-#% required: yes
-#% guisection: Output
-#%end
-
-#%option G_OPT_R_OUTPUT
-#% key: output_sh
-#% description: Name of output shadow mask
 #% required: yes
 #% guisection: Output
 #%end
@@ -75,6 +75,7 @@
 
 
 import os
+import subprocess
 
 import grass.script as grass
 from fmask import fmask as fm
@@ -94,7 +95,7 @@ def config(sensor, refband, terminfo):
 
     # set all the attributes
     conf.setReflectiveBand = refband
-    conf.setThermalInfo = terminfo
+    self.toa_file = os.path.join(self.tmp_dir, "toa.tif")
 
     
 
@@ -109,8 +110,10 @@ def filesnames():
 
 def main():
 
-    img  = options['input']   # name of input image
+    img  = options['input_dir']   # name of input directory
+    print("This is the input-dir:", img)
     img_out = options['output_cl']  # name of output image 
+    print("This is the output-file:", img_out)
 
     try:
         from fmask import fmask as fm
@@ -118,6 +121,9 @@ def main():
         gs.message(_("you need to install the python fmask library first..."))
         gs.fatal(_("Module requires fmask library: {}").format(e))
     
+    cmd = f"fmask_sentinel2Stacked.py -o {img_out} --safedir {img}"
+    print(cmd)
+    subprocess.call(cmd, shell=True)
     
     return 0
 
