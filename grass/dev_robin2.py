@@ -31,95 +31,128 @@
 #%flag
 #% key: v
 #% description: print informative messages
-#% guisection: options
+#% guisection: flags
 #%end
 
 #%flag
 #% key: i
 #% description: keep intermediate files
-#% guisection: options
+#% guisection: flags
 #%end
 
 #%option G_OPT_M_DIR
-#% key: temp_output_dir
+#% key: temp_out_dir
 #% type: string
 #% description: path to directory where to store temporary output
 #% required: no
-#% guisection: options
+#% guisection: values
 #%end
 
+#%flag
+#% key: j
+#% description: output pixel size in metres
+#% guisection: flags
+#%end
 
 #%option
-#% key: ps
+#% key: pixelsize
 #% type: integer
 #% description: output pixel size in metres
 #% answer = 20
-#% guisection: options
+#% guisection: values
+#%end
+
+#%flag
+#% key: m
+#% description: mincloudsize in pixels
+#% guisection: flags
 #%end
 
 #%option
-#% key: m
+#% key: mincloud
 #% type: integer
 #% description: mincloudsize in pixels
 #% answer: 0
-#% guisection: options
+#% guisection: values
+#%end
+
+#%flag
+#% key: c
+#% description: cloudbufferdistance in metres 
+#% guisection: flags
 #%end
 
 #%option
-#% key: c
+#% key: cloudbuffer
 #% type: integer
 #% description: cloudbufferdistance in metres 
 #% answer: 150
-#% guisection: options
+#% guisection: values
+#%end
+
+#%flag
+#% key: s
+#% description: shadow buffer distance in metres
+#% guisection: flags
 #%end
 
 #%option
-#% key: s
+#% key: shadowbuffer
 #% type: integer
 #% description: shadow buffer distance in metres
 #% answer: 300
-#% guisection: options
+#% guisection: values
 #%end
 
-#%option
+
+#%flag
 #% key: t
-#% type: float
 #% description: cloud probability threshold
-#% answer: 0.2
-#% guisection: options
+#% guisection: flags
 #%end
 
 #%option
-#% key: n
-#% type: float
-#% description: threshold for nir reflectance (0-1)
-#% answer: 0.11
-#% guisection: options
-#%end
-
-#%option
-#% key: g
-#% type: float
-#% description: threshold for green-band reflectance (0-1)
-#% answer: 0.1
-#% guisection: options
-#%end
-
-#%option
-#% key: p
-#% type: string
-#% description: parallax-test
-#% answer: no
-#% guisection: options
-#%end
-
-#%option
-#% key: cb
+#% key: prob
 #% type: integer
-#% description: size of buffer in shadowlayer (in number of pixels)
-#% required: no
-#% answer: 10
+#% description: cloud probability threshold (*1/100)
+#% answer: 20
+#% guisection: values
 #%end
+
+#%flag
+#% key: n
+#% description: threshold for nir reflectance 
+#% guisection: flags
+#%end
+
+#%option
+#% key: nir
+#% type: integer
+#% description: threshold for nir reflectance (*1/100)
+#% answer: 11 
+#% guisection: values
+#%end
+
+#%flag
+#% key: g
+#% description: threshold for green-band reflectance 
+#% guisection: flags
+#%end
+
+#%option
+#% key: green
+#% type: integer
+#% description: threshold for green-band reflectance (*1/100)
+#% answer: 10
+#% guisection: values
+#%end
+
+#%flag
+#% key: p
+#% description: parallax-test
+#% guisection: flags
+#%end
+
 
 #%option G_OPT_BIN_OUTPUT
 #% key: output_cl
@@ -148,11 +181,8 @@ def parameters():
 
     # cmd-input for verbose output
     if flags['v']:
-        v = "-v"
-        params["verbose"] = v
-    else:
-        v = ""
-        params["verbose"] = v
+        params[""] = "-v"
+
 
     # cmd input for intermediate files
     if flags["i"]:
@@ -164,83 +194,77 @@ def parameters():
             print("no valid directory provided. Continue without saving temporary files")
     
     # output pixel size
-    if options["ps"]:
-        params["--pixelsize"] = options["ps"]
+    if flags["j"]:
+        params["--pixelsize"] = options["pixelsize"]
 
     # mincloudsize
-    if options["m"]:
-        params["--mincloudsize"] = options["m"]
+    if flags["m"]:
+        params["--mincloudsize"] = options["mincloud"]
 
     # cloudbufferdistance
-    if options["c"]:
-        params["--cloudbufferdistance"] = options["c"]
+    if flags["c"]:
+        params["--cloudbufferdistance"] = options["cloudbuffer"]
 
-    if options["s"]:
-        params["--shadowbufferdistance"] = options["s"]
 
+    # shadowbufferdistance
+    if flags["s"]:
+        params["--shadowbufferdistance"] = options["shadowbuffer"]
+
+    # couldprobtreshold
+    if flags["t"]:
+        params["--cloudprobthreshold"] = options["prob"]
+
+    # nir reflectanve
+    if flags["n"]:
+        params["--nirsnowthreshold"] = options["nir"]
+
+    # greensnowthreshold
+    if flags["s"]:
+        params["--greensnowthreshold"] = options["green"]
+
+    if flags["p"]:
+        params["--parallaxtest"] = None
 
     return params
 
 
-    
-
-    
-
-    
-
-
-
 
 def config(sensor, refband, terminfo):
-
-    """[create a function that creates an instance of a class FmaskConfig]
-    
-    Arguments:
-        sensor {integer} -- [either 1 or 2 for Landsat8 or Sentinel]
-    """ 
-    # create instance of that class
-    conf = cfg.FmaskConfig(sensor)
-
-    # set all the attributes
-    conf.setReflectiveBand = refband
-    self.toa_file = os.path.join(self.tmp_dir, "toa.tif")
-
-    
-
+    pass
 
 
 
 def filesnames():
-
     fnames = cfg.FmaskFilenames()
 
 
 
 def main():
 
-    print("options os true/false")
-    if options["c"]:
-        print("True output")
-    else:
-        print("false output")
-
-    params = parameters()
-    print("this is what params returns", "\n", params)
-
-    # img  = options['input_dir']   # name of input directory
-    # print("This is the input-dir:", img)
-    # img_out = options['output_cl']  # name of output image 
-    # print("This is the output-file:", img_out)
-
-
     try:
         from fmask import fmask as fm
     except ImportError as e:
         gs.message(_("you need to install the python fmask library first..."))
         gs.fatal(_("Module requires fmask library: {}").format(e))
+
+    # the path to the input safedit
+    safedir = options["input_dir"]
+
+    # the path to output-rasterfile
+    img_out = options["output_cl"]
+
     
-    # cmd = f"fmask_sentinel2Stacked.py -o {img_out} {v} --safedir {img}"
-    # print(cmd)
+
+    params = parameters()
+    print("this is what params returns", "\n", params)
+
+
+    
+    cmd_string = " ".join([i for m,j in params.items() for i in [m, str(j)]])
+    print("this is the concatenated list", cmd_string)
+    
+    cmd = f"fmask_sentinel2Stacked.py -o {img_out} {cmd_string} --safedir {safedir}"
+    print(cmd)
     # subprocess.call(cmd, shell=True)
     
     return 0
