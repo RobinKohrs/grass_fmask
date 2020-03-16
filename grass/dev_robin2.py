@@ -253,12 +253,8 @@ def main():
     # the path to output-rasterfile
     img_out = options["output_cl"]
 
-    
-
     params = parameters()
     print("this is what params returns", "\n", params)
-
-
     
     cmd_string = " ".join([i for m,j in params.items() for i in [m, str(j)]])
     print("this is the concatenated list", cmd_string)
