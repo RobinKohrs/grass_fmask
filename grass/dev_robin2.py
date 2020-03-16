@@ -58,7 +58,7 @@
 #% key: pixelsize
 #% type: integer
 #% description: output pixel size in metres
-#% answer = 20
+#% answer: 20
 #% guisection: values
 #%end
 
