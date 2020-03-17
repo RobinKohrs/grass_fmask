@@ -261,7 +261,7 @@ def main():
     
     cmd = f"fmask_sentinel2Stacked.py -o {img_out} {cmd_string} --safedir {safedir}"
     print(cmd)
-    # subprocess.call(cmd, shell=True)
+    subprocess.call(cmd, shell=True)
     
     return 0
 
