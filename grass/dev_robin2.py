@@ -169,8 +169,8 @@ import os
 import subprocess
 
 import grass.script as grass
-from fmask import fmask as fm
-from fmask import config as cfg
+#from fmask import fmask as fm
+#from fmask import config as cfg
 
 
 
@@ -241,11 +241,11 @@ def filesnames():
 
 def main():
 
-    try:
-        from fmask import fmask as fm
-    except ImportError as e:
-        gs.message(_("you need to install the python fmask library first..."))
-        gs.fatal(_("Module requires fmask library: {}").format(e))
+    # try:
+    #     from fmask import fmask as fm
+    # except ImportError as e:
+    #     gs.message(_("you need to install the python fmask library first..."))
+    #     gs.fatal(_("Module requires fmask library: {}").format(e))
 
     # the path to the input safedit
     safedir = options["input_dir"]
