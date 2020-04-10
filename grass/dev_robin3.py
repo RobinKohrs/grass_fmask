@@ -113,12 +113,21 @@
 
 import os
 import sys
+import pprint
+
+print("os.environ")
+os.environ["GRASS_PYTHON"] = "/home/robin/miniconda3/envs/fmask/bin/python"
+os.environ["PYTHONPATH"] = "/home/robin/miniconda3/envs/fmask/lib/python3.8/site-packages"
+env = os.environ
+pprint.pprint(dict(env), width = 1)
 
 print("SYS PATH")
-print(sys.path)
-print("")
-print("SYSEXECUTABLE")
+for i in sys.path:
+    print(i)
+
+print("SYS EXECUTABLE")
 print(sys.executable)
+
 
 import grass.script as grass
 from rios import fileinfo
