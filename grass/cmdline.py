@@ -156,7 +156,7 @@
 
 
 #%option G_OPT_BIN_OUTPUT
-#% key: output_cl
+#% key: output
 #% description: Name of output cloud mask
 #% required: yes
 #% guisection: Output
@@ -261,7 +261,7 @@ def main():
     else:
         safe_file = options["input_dir"]
         parts = safe_file.split("_")
-        out_file = parts[0] + "_" + parts[2][0:7] + "_cloudmask.img"
+        out_file = parts[0] + "_" + parts[2][0:7] + options["output"] + ".img"
         print(safe_file)
         print(out_file)
         cmd_string = " ".join([i for m,j in params.items() for i in [m, str(j)]])

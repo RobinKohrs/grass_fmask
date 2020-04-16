@@ -20,9 +20,13 @@
 ## Solution
 - Remove any `conda`-initialization from `.profile`, `.bash_profile` or `.bashrc`
 - Remove/uncomment  especially any line like: `export PATH = "/home/usr/miniconda3/bin:$PATH"
-- Make sure that conda is not on the path by running `echo $PATH`
 - Create an alias in your `.profile` or `.bashrc` for actvatiing `conda`
 	+  alias condainit='export PATH="/path/to/conda/bin:$PATH"'
 	+ run `source .bashrc`
 	+ "default" python sould be system python
+- add `~/home/miniconda3/bin` to the path, e.g.
+
+	+ `export PATH=/home/robin/.local/bin:/home/robin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/robin/miniconda3/bin/`
+- set proper "PROJ_LIB"-Environment-Variable (I did it in the python-script) 
+	+`os.environ["PROJ_LIB"] = "/home/robin/miniconda3/share/proj"`
 
