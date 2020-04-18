@@ -28,6 +28,17 @@
 #% required: yes
 #%end
 
+#%flag
+#% key: minconda
+#% description: choose if you use anaconda or miniconda 
+#% required: yes
+#%end
+
+#%flag
+#% key: anaconda
+#% description: choose if you use anaconda or miniconda 
+#% required: yes
+#%end
 
 #%flag
 #% key: v
@@ -166,6 +177,7 @@ import os
 import sys
 import subprocess
 import numpy
+import time
 
 import grass.script as grass
 
@@ -224,7 +236,13 @@ def parameters():
 
     return params
 
-
+def findconda():
+    if flags["miniconda"]:
+        conda = "miniconda?"
+    elif flags["anaconda"]:
+        codna = "anaconda?"
+    else:
+        print("You need to use and select some version of miniconda/anaconda")
 
 def main():
 
@@ -237,27 +255,46 @@ def main():
     # print safe-files
     print(".SAFE-files in the provided location are:")
 
+    # if not provided single file
     if not options["input_dir"].endswith(".SAFE"):
         input_dir = options["input_dir"] + "/"
 
         safe_files = [f for f in os.listdir(input_dir) if f.endswith(".SAFE") ]
         for i in safe_files:
             print(i)
+        print(" ")
 
+        # run fmask on every .safe-directory
+        for counter, i in enumerate(safe_files):
 
-        for i in safe_files:
             # make output cloudmask
+            if options["output"].endswith(".img"):
+                outfile = options["output"]
+            else:
+                outfile = options["output"] + ".img"
             parts = i.split("_")
-            out_file = parts[0] + "_" + parts[2][0:7] + "_coudmask"
+            out_file = parts[0] + "_" + parts[2][0:7] + "_" + outfile
+            out_file = input_dir + out_file
+            #print("OUTFILE")
+            #print(out_file)
+            
+            # make input absolut path
+            i_abs = input_dir + i
 
             # parse options from dictionary
             cmd_string = " ".join([i for m,j in params.items() for i in [m, str(j)]])
-            cmd = f"fmask_sentinel2Stacked.py -o {out_file} {cmd_string} --safedir {i}"
+            cmd = f"fmask_sentinel2Stacked.py -o {out_file} {cmd_string} --safedir {i_abs}"
 
-            print("CMDCALL")
+            print("CMDCALL", counter +1)
             print(cmd)
 
-            #subprocess.call(cmd, shell=True)
+            # change current working directory to store cloudmask in desired location
+            print(os.getcwd())
+            os.chdir(options["input_dir"] + "/")
+            print(os.getcwd())
+            subprocess.call(cmd, shell=True)
+
+    # single cloudsmask        
     else:
         safe_file = options["input_dir"]
         parts = safe_file.split("_")
@@ -267,10 +304,18 @@ def main():
         cmd_string = " ".join([i for m,j in params.items() for i in [m, str(j)]])
         cmd = f"fmask_sentinel2Stacked.py -o {out_file} {cmd_string} --safedir {safe_file}"
         print(cmd)
-        subprocess.call(cmd, shell = True)
+        #subprocess.call(cmd, shell = True)
     return 0
 
 if __name__ == "__main__":
+    # set path to proj.db
+    os.environ["PROJ_LIB"] = "/home/robin/miniconda3/share/proj"
+    print("PROJ")
+    print(os.getenv("PROJ_LIB"))
+    os.environ["PATH"] =   "/home/robin/miniconda3/bin/" + os.pathsep + os.getenv("PATH")
+    print("PATH")
+    print(os.getenv("PATH"))
+    print(" ")
     options, flags = grass.parser()
     main()
 
