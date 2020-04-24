@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d000bba-7fba-4af0-9917-578cc952cea4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/fmask_grass.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.zshrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grass/cmdline.py" beforeDir="false" afterPath="$PROJECT_DIR$/grass/cmdline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grass/sentinelsat_download.py" beforeDir="false" afterPath="$PROJECT_DIR$/grass/sentinelsat_download.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,23 +33,22 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="sentinelsat_download" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="fmask_grass" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/grass" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grass/sentinelsat_download.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -93,41 +85,45 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="240" y="77" width="800" height="717" key="#Intentions/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587653406234" />
+    <state x="104" y="73" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587748870709">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="104" y="73" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587748870709" />
     <state x="354" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587556453440">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="354" y="221" key="#com.intellij.fileTypes.FileTypeChooser/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587556453440" />
-    <state x="368" y="23" width="543" height="777" key="#sentinelsat_download" timestamp="1587653613789">
+    <state x="368" y="23" width="543" height="777" key="#sentinelsat_download" timestamp="1587749185605">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="368" y="23" width="543" height="777" key="#sentinelsat_download/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587653613789" />
-    <state width="1239" height="184" key="GridCell.Tab.0.bottom" timestamp="1587652473733">
+    <state x="368" y="23" width="543" height="777" key="#sentinelsat_download/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749185605" />
+    <state width="1239" height="184" key="GridCell.Tab.0.bottom" timestamp="1587751629126">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1239" height="184" key="GridCell.Tab.0.bottom/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587652473733" />
-    <state width="1239" height="184" key="GridCell.Tab.0.center" timestamp="1587652473728">
+    <state width="1239" height="184" key="GridCell.Tab.0.bottom/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587751629126" />
+    <state width="1239" height="184" key="GridCell.Tab.0.center" timestamp="1587751629123">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1239" height="184" key="GridCell.Tab.0.center/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587652473728" />
-    <state width="1239" height="184" key="GridCell.Tab.0.left" timestamp="1587652473727">
+    <state width="1239" height="184" key="GridCell.Tab.0.center/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587751629123" />
+    <state width="1239" height="184" key="GridCell.Tab.0.left" timestamp="1587751629122">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1239" height="184" key="GridCell.Tab.0.left/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587652473727" />
-    <state width="1239" height="184" key="GridCell.Tab.0.right" timestamp="1587652473728">
+    <state width="1239" height="184" key="GridCell.Tab.0.left/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587751629122" />
+    <state width="1239" height="184" key="GridCell.Tab.0.right" timestamp="1587751629125">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1239" height="184" key="GridCell.Tab.0.right/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587652473728" />
-    <state x="149" y="50" key="SettingsEditor" timestamp="1587565386989">
+    <state width="1239" height="184" key="GridCell.Tab.0.right/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587751629125" />
+    <state x="149" y="50" key="SettingsEditor" timestamp="1587749339077">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="149" y="50" key="SettingsEditor/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587565386989" />
+    <state x="149" y="50" key="SettingsEditor/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749339077" />
     <state x="333" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1587633363550">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="333" y="244" key="com.intellij.ide.util.TipDialog/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587633363550" />
-    <state x="261" y="23" width="782" height="777" key="find.popup" timestamp="1587566335532">
+    <state x="261" y="23" width="782" height="777" key="find.popup" timestamp="1587749051759">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="261" y="23" width="782" height="777" key="find.popup/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587566335532" />
+    <state x="261" y="23" width="782" height="777" key="find.popup/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749051759" />
   </component>
 </project>
