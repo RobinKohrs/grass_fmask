@@ -2,6 +2,7 @@
 # Author: Vroni
 
 # import sys
+import os
 import geopandas as gpd
 from sentinelsat import SentinelAPI, read_geojson, geojson_to_wkt
 
@@ -26,6 +27,10 @@ def sentinel2_downloader(user, password, bounds, dates, max_cloudcover):
     products_df = api.to_dataframe(products)
     print('These are the available Sentinel 2 Scenes for your query:\n')
     print(products_df)
+    #down_all = input('Do you want to download all of the listed products? [y/n] ')
+    #if down_all == 'y':
+     #   print('Data is saved to current working directory.')
+      #  api.download_all(products_df, directory_path=os.getcwd())
 
 # then: - select and maybe sort sentinel scenes and !download them!
 
