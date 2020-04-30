@@ -1,4 +1,6 @@
 import os
+import sys
+from multiprocessing import Pool
 
 from rios import fileinfo
 from fmask import fmask
@@ -6,7 +8,22 @@ from fmask import config
 from fmask.cmdline.sentinel2Stacked import makeStackAndAngles, checkAnglesFile
 
 
-def main():
+def main(safe):
+
+    # make directory for cloudmasks
+    if _input.endswith(".SAFE/"):
+        paths = _input.split(os.sep)
+        cloudmaskdir = os.path.join(os.sep, *paths[0:-2], "cloudmasks")
+        os.makedirs(cloudmaskdir, exist_ok=True)
+        
+    elif _input.endswith(".SAFE"):
+        paths = _input.split(os.sep)
+        cloudmaskdir = os.path.join(os.sep, *paths[0:-1], "cloudmasks")
+        os.makedirs(cloudmaskdir, exist_ok=True)
+    else:
+        cloudmaskdir = os.path.join(_input, "cloudmasks")
+        os.makedirs(cloudmaskdir, exist_ok=True)
+
     # a dictionary containing all the default arguments from the argument parser
     args = {'safedir': None,
             'granuledir': None,
@@ -23,12 +40,7 @@ def main():
             'cloudprobthreshold': 100 * config.FmaskConfig.Eqn17CloudProbThresh,
             'nirsnowthreshold': config.FmaskConfig.Eqn20NirSnowThresh,
             'greensnowthreshold': config.FmaskConfig.Eqn20GreenSnowThresh,
-            'parallaxtest': False}                                        
-    
-    
-    # modification of the argument dictionary with custom values
-    args['output'] = 'cloud.img'
-    args['safedir'] = '/home/robin/geodata/rasterdata/satellitedata/sentinel2/geo450/jena_roda/S2A_MSIL1C_20200414T103021_N0209_R108_T32UPB_20200414T105321.SAFE'
+            'parallaxtest': False}                                       
     
     
     # a helper class so that the arguments can be called with args.argument instead of args['argument']
@@ -38,9 +50,18 @@ def main():
                 setattr(self, key, value)
     
     cmdargs = Cmdargs(args)
+    print("SAFE", safe)
+    fp = safe.split(os.sep)
+    safe_only = fp[-1]
+    rest = os.path.join(*fp[0:-1])
+    bar = os.path.join(rest, "cloudmasks")
+    name = os.path.join(bar,  safe_only[0:19] + "_.img")
+    print("NAME", name)
+    #print("SAFe", safe)
+    cmdargs.output = name
+    cmdargs.safedir = safe
     
-    tempStack = False
-    
+
     if cmdargs.safedir is not None or cmdargs.granuledir is not None:
         tempStack = True
         resampledBands = makeStackAndAngles(cmdargs)
@@ -82,4 +103,30 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _input = sys.argv[1]
+    # make list with safedirs
+    if _input.endswith(".SAFE/") or _input.endswith(".SAFE"):
+        safe_dir_file = _input
+        safe_dir = []
+        safe_dir.append(safe_dir_file)
+        print("You provided one file:")
+        print(safe_dir)
+    else:
+        if not _input.endswith(".SAFE/"):
+            if os.path.isdir(_input):
+                print("provided directory input")
+            else:
+                print("directory '{}' does not exists".format(_input))
+                sys.exit(1)
+        if len([x for x in os.listdir(_input) if x.endswith(".SAFE")]) < 1:
+            print("in the provided path are no .safe directories")
+            sys.exit(1)
+        else:
+            safe_dir = [_input + x for x in os.listdir(_input) if x.endswith(".SAFE")]
+            print("for the following directories a cloudmask will be computed")
+            for i in safe_dir:
+                print(i)
+
+    # parallel processing setup
+    p =  Pool(6)
+    p.map(main, safe_dir)

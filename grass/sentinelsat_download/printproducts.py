@@ -11,7 +11,7 @@ api = SentinelAPI("roko93", "Rotole11", 'https://scihub.copernicus.eu/dhus')
 # dowload_scenes by date and polygon
 footprint = geojson_to_wkt(read_geojson("./../../roi/jena_wgs84.geojson"))
 products = api.query(footprint,
-                     date = (date(2020,1,1), date(2020,4,1)),
+                     date = (date(2020,1,1), date(2020,1,10)),
                      producttype = 'S2MSI1C',
                      platformname = 'Sentinel-2')
 
@@ -41,6 +41,8 @@ print(df_new.head(), df_new.tail())
 print(" ")
 print("Unique Tiles intersecting the area are: ")
 print(df_new.tile.unique())
+print(" ")
+print("all in all there are {} scenes to download".format(len(df_new.index)))
 
 # only print the index in pandas
 #print(df_overview.index)

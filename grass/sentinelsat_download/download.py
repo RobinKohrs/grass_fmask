@@ -28,5 +28,5 @@ for tile in tiles:
     products.update(pp)
 
 
-api.download_all(products, directory_path = "/home/robin/projects/geodata/rasterdata/satellitedata/sentinel2/geo450/jena_roda")
+api.download_all(products, directory_path = "/home/robin/geodata/rasterdata/satellitedata/sentinel2/geo450/jena_roda")
 
