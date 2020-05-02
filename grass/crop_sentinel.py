@@ -1,11 +1,12 @@
 # Script to crop sentinel scene to AOI while maintaining .safe directory structure
 
-import fiona
-import rasterio
-import rasterio.mask
 import os
 from glob import glob
 import warnings
+import sys
+import fiona
+import rasterio
+import rasterio.mask
 
 
 def crop_raster(shape, raster):
@@ -23,6 +24,7 @@ def crop_raster(shape, raster):
 
     with rasterio.open(raster, 'w', **out_meta) as dest:
         dest.write(out_image)
+
 
 def iter_crop(dir, shape):
     glob_pattern = os.path.join(dir, '*')
@@ -42,8 +44,8 @@ def get_img_dir(input_dir):
         img_dir = dir_hop(input_dir)
     else:
         in_dir = input_dir + os.sep
-        safe_files = [f for f in os.listdir(in_dir) if f.endswith('.SAFE') ]
-        print('There are ' + len(safe_files) + '.SAFE-files in the provided location: \n')
+        safe_files = [f for f in os.listdir(in_dir) if f.endswith('.SAFE')]
+        print('There are ', len(safe_files), '.SAFE-files in the provided location: \n')
         print(safe_files)
         safe_files_full = [os.path.join(input_dir, f) for f in safe_files]
         img_dir = []
@@ -53,6 +55,7 @@ def get_img_dir(input_dir):
 
     return img_dir
 
+
 def dir_hop(safe_dir):
     gran_folder = os.path.join(safe_dir, 'GRANULE')
     sub_folder = os.listdir(gran_folder)[0]
@@ -61,13 +64,14 @@ def dir_hop(safe_dir):
 
 
 def main():
-    shape = input('Please enter the path to the shapefile of your AOI: ')
-    #shape = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/jena-roda-testsite.shp'
-    #input_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/sentinel2_testdata'
-    input_dir = input('Please enter the path to your .safe directory or a directory containing multiple .safe directories: ')
+    # (how to make sure that also windows paths are accepted?)
+    shape = sys.argv[1] # first argument in commandline is path to shapefile
+    # shape = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/jena-roda-testsite.shp'
+    input_dir = sys.argv[2] # second argument in commandline is path to safe_dir(s)
+    # input_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/sentinel2_testdata'
     safe_dirs = get_img_dir(input_dir)
 
-    if type(safe_dirs)==list:
+    if type(safe_dirs) == list:
         for sd in safe_dirs:
             iter_crop(sd, shape)
     else:
