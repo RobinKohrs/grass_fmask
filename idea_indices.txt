@@ -1,1 +1,7 @@
-x
+Arbeitsablauf:
+
+
+
+Aggregierung nach Jahreszeiten:
+- t.rast.extract 
+-- t.rast.extract --overwrite input=sentinel@Perm where="start_time > '2019-12-21 00:00:00' and start_time < '2020-03-20 23:59:59' and name like '%B04%'" output=b4_w2019
