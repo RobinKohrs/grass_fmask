@@ -1,5 +1,13 @@
 Arbeitsablauf:
 
+1. Download Sentinel
+2. Import B4+8 + Cloud Mask
+3. Timestamps für Bänder und Cloud Mask
+4. S-T-C für Bänder und Clouds
+5. NDVI mit Maske
+6. Aggregierung der NDVI für eine Season
+7. Vergleich von Seasons (Änderungsindize)
+
 
 
 Aggregierung nach Jahreszeiten:
