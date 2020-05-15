@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d000bba-7fba-4af0-9917-578cc952cea4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/grass/mask_clouds.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grass/trials_masking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fmask_grass.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fmask_grass.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grass/crop_sentinel.py" beforeDir="false" afterPath="$PROJECT_DIR$/grass/crop_sentinel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grass/dev_robin3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grass/mask_clouds.py" beforeDir="false" afterPath="$PROJECT_DIR$/grass/mask_clouds.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +38,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Python.crop_sentinel">
+  <component name="RunManager" selected="Python.mask_clouds">
     <configuration name="crop_sentinel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="fmask_grass" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -53,6 +54,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grass/crop_sentinel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mask_clouds" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="fmask_grass" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/grass" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grass/mask_clouds.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -103,8 +125,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="trials_masking" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="fmask_grass" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/grass" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grass/trials_masking.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mask_clouds" />
+        <item itemvalue="Python.trials_masking" />
         <item itemvalue="Python.crop_sentinel" />
         <item itemvalue="Python.sentinel2_mosaic" />
         <item itemvalue="Python.sentinelsat_download" />
@@ -144,68 +189,103 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="368" y="23" width="543" height="777" key="#sentinelsat_download/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749185605" />
-    <state width="1380" height="297" key="GridCell.Tab.0.bottom" timestamp="1588171969549">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1675" height="302" key="GridCell.Tab.0.bottom" timestamp="1589540178880">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
-    <state width="1413" height="283" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1588064674771" />
+    <state width="1675" height="302" key="GridCell.Tab.0.bottom/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589540178880" />
+    <state width="1190" height="195" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1588695098099" />
     <state width="1239" height="184" key="GridCell.Tab.0.bottom/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587838743940" />
     <state width="1239" height="184" key="GridCell.Tab.0.bottom/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587796708755" />
     <state width="1380" height="297" key="GridCell.Tab.0.bottom/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588171969549" />
-    <state width="1380" height="297" key="GridCell.Tab.0.center" timestamp="1588171969548">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1486" height="330" key="GridCell.Tab.0.bottom/1280.87.1920.1057/0.23.1280.777@1280.87.1920.1057" timestamp="1588434647911" />
+    <state width="1469" height="331" key="GridCell.Tab.0.bottom/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614580804" />
+    <state width="1675" height="302" key="GridCell.Tab.0.center" timestamp="1589540178879">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
-    <state width="1413" height="283" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1588064674770" />
+    <state width="1675" height="302" key="GridCell.Tab.0.center/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589540178879" />
+    <state width="1190" height="195" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1588695098099" />
     <state width="1239" height="184" key="GridCell.Tab.0.center/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587838743939" />
     <state width="1239" height="184" key="GridCell.Tab.0.center/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587796708750" />
     <state width="1380" height="297" key="GridCell.Tab.0.center/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588171969548" />
-    <state width="1380" height="297" key="GridCell.Tab.0.left" timestamp="1588171969531">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1486" height="330" key="GridCell.Tab.0.center/1280.87.1920.1057/0.23.1280.777@1280.87.1920.1057" timestamp="1588434647909" />
+    <state width="1469" height="331" key="GridCell.Tab.0.center/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614580802" />
+    <state width="1675" height="302" key="GridCell.Tab.0.left" timestamp="1589540178878">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
-    <state width="1413" height="283" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1588064674770" />
+    <state width="1675" height="302" key="GridCell.Tab.0.left/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589540178878" />
+    <state width="1190" height="195" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1588695098098" />
     <state width="1239" height="184" key="GridCell.Tab.0.left/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587838743938" />
     <state width="1239" height="184" key="GridCell.Tab.0.left/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587796708748" />
     <state width="1380" height="297" key="GridCell.Tab.0.left/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588171969531" />
-    <state width="1380" height="297" key="GridCell.Tab.0.right" timestamp="1588171969549">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1486" height="330" key="GridCell.Tab.0.left/1280.87.1920.1057/0.23.1280.777@1280.87.1920.1057" timestamp="1588434647909" />
+    <state width="1469" height="331" key="GridCell.Tab.0.left/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614580802" />
+    <state width="1675" height="302" key="GridCell.Tab.0.right" timestamp="1589540178879">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
-    <state width="1413" height="283" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1588064674771" />
+    <state width="1675" height="302" key="GridCell.Tab.0.right/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589540178879" />
+    <state width="1190" height="195" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1588695098099" />
     <state width="1239" height="184" key="GridCell.Tab.0.right/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587838743939" />
     <state width="1239" height="184" key="GridCell.Tab.0.right/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587796708753" />
     <state width="1380" height="297" key="GridCell.Tab.0.right/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588171969549" />
-    <state width="1413" height="279" key="GridCell.Tab.1.bottom" timestamp="1588002169738">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1486" height="330" key="GridCell.Tab.0.right/1280.87.1920.1057/0.23.1280.777@1280.87.1920.1057" timestamp="1588434647910" />
+    <state width="1469" height="331" key="GridCell.Tab.0.right/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614580803" />
+    <state width="1596" height="314" key="GridCell.Tab.1.bottom" timestamp="1589364555810">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
+    <state width="1596" height="314" key="GridCell.Tab.1.bottom/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589364555810" />
     <state width="1413" height="279" key="GridCell.Tab.1.bottom/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588002169738" />
-    <state width="1413" height="279" key="GridCell.Tab.1.center" timestamp="1588002169736">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1469" height="326" key="GridCell.Tab.1.bottom/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614084590" />
+    <state width="1596" height="314" key="GridCell.Tab.1.center" timestamp="1589364555808">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
+    <state width="1596" height="314" key="GridCell.Tab.1.center/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589364555808" />
     <state width="1413" height="279" key="GridCell.Tab.1.center/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588002169736" />
-    <state width="1413" height="279" key="GridCell.Tab.1.left" timestamp="1588002169736">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1469" height="326" key="GridCell.Tab.1.center/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614084589" />
+    <state width="1596" height="314" key="GridCell.Tab.1.left" timestamp="1589364555807">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
+    <state width="1596" height="314" key="GridCell.Tab.1.left/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589364555807" />
     <state width="1413" height="279" key="GridCell.Tab.1.left/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588002169736" />
-    <state width="1413" height="279" key="GridCell.Tab.1.right" timestamp="1588002169737">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state width="1469" height="326" key="GridCell.Tab.1.left/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614084588" />
+    <state width="1596" height="314" key="GridCell.Tab.1.right" timestamp="1589364555809">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
+    <state width="1596" height="314" key="GridCell.Tab.1.right/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589364555809" />
     <state width="1413" height="279" key="GridCell.Tab.1.right/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588002169737" />
-    <state x="149" y="50" key="SettingsEditor" timestamp="1587834410998">
+    <state width="1469" height="326" key="GridCell.Tab.1.right/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588614084589" />
+    <state x="149" y="50" key="SettingsEditor" timestamp="1588679678115">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
+    <state x="149" y="50" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1588679678115" />
     <state x="149" y="50" key="SettingsEditor/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587834410998" />
     <state x="149" y="50" key="SettingsEditor/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749339077" />
-    <state x="1780" y="324" key="com.intellij.ide.util.TipDialog" timestamp="1588172403020">
-      <screen x="1280" y="23" width="1920" height="1057" />
+    <state x="1504" y="130" key="SettingsEditor/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588611051232" />
+    <state x="-1420" y="213" key="com.intellij.ide.util.TipDialog" timestamp="1589531964799">
+      <screen x="-1920" y="-88" width="1920" height="1057" />
     </state>
+    <state x="-1420" y="213" key="com.intellij.ide.util.TipDialog/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589531964799" />
+    <state x="333" y="244" key="com.intellij.ide.util.TipDialog/0.23.1280.777@0.23.1280.777" timestamp="1588674374146" />
     <state x="333" y="244" key="com.intellij.ide.util.TipDialog/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587837602210" />
     <state x="333" y="244" key="com.intellij.ide.util.TipDialog/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587803909939" />
     <state x="1780" y="324" key="com.intellij.ide.util.TipDialog/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1588172403020" />
+    <state x="333" y="244" key="com.intellij.ide.util.TipDialog/1280.93.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1589188182728" />
     <state x="2126" y="197" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1587999938122">
       <screen x="1280" y="23" width="1920" height="1057" />
     </state>
     <state x="2126" y="197" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/1280.23.1920.1057/0.23.1280.777@1280.23.1920.1057" timestamp="1587999938122" />
-    <state x="261" y="23" width="782" height="777" key="find.popup" timestamp="1587749051759">
+    <state x="261" y="23" width="782" height="777" key="find.popup" timestamp="1588678667621">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
+    <state x="261" y="23" width="782" height="777" key="find.popup/0.23.1280.777@0.23.1280.777" timestamp="1588678667621" />
     <state x="261" y="23" width="782" height="777" key="find.popup/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749051759" />
+    <state x="1672" y="87" width="1173" height="1057" key="find.popup/1280.87.1920.1057/0.23.1280.777@1280.87.1920.1057" timestamp="1588433956389" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="_shapes" />
+        <watch expression="_shapes" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
