@@ -13,6 +13,7 @@ def crop_raster(shape, raster):
     with fiona.open(shape, 'r') as shapefile:
         shapes = [feature['geometry'] for feature in shapefile]
 
+
     with rasterio.open(raster) as src:
         out_image, out_transform = rasterio.mask.mask(src, shapes, crop=True)
         out_meta = src.meta
