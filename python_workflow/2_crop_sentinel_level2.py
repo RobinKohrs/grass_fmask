@@ -6,6 +6,8 @@ import rasterio.mask
 import os
 from glob import glob
 import warnings
+import sys
+import shutil
 
 
 def crop_raster(shape, raster):
@@ -27,10 +29,10 @@ def crop_raster(shape, raster):
 def iter_crop(dir, shape):
     glob_pattern = os.path.join(dir, '*')
     files = glob(glob_pattern)
-    if len(files) != 14:
-        warnings.warn('Usually Sentintel 2 download contains 14 image files. There are ' + str(len(files)) +
-                      ' files in the current directory: ' + dir +
-                      '\n Please check if an error occured in the download etc. \n Cropping proceeds with existing files.')
+    # if len(files) != 14:
+    #     warnings.warn('Usually Sentintel 2 download contains 14 image files. There are ' + str(len(files)) +
+    #                   ' files in the current directory: ' + dir +
+    #                   '\n Please check if an error occured in the download etc. \n Cropping proceeds with existing files.')
 
     for f in files:
         crop_raster(shape, f)
@@ -56,18 +58,21 @@ def get_img_dir(input_dir):
 def dir_hop(safe_dir):
     gran_folder = os.path.join(safe_dir, 'GRANULE')
     sub_folder = os.listdir(gran_folder)[0]
-    dirs_to_remove = [x for x in os.listdir(os.path.join(gran_folder, subfolder) if "R20m" no in x)]
-    print(dirs_to_remove)
-    return "END"
-    r20 = os.path.join(gran_folder, sub_folder, "R20m", 'IMG_DATA')
+    resolution_folder = os.listdir(os.path.join(gran_folder, sub_folder, "IMG_DATA"))
+    print("dirs with spatial resolution to remove")
+    print(resolution_folder)
+    dirs_to_remove = [x for x in os.listdir(os.path.join(gran_folder, sub_folder, "IMG_DATA")) if "R20m" not in x]
+    for i in dirs_to_remove:
+        shutil.rmtree(os.path.join(gran_folder, sub_folder,"IMG_DATA", i))
+    r20 = os.path.join(gran_folder, sub_folder,'IMG_DATA', "R20m")
     return r20
 
 
 def main():
-    shape = input('Please enter the path to the shapefile of your AOI: ')
+    shape = sys.argv[1]
     #shape = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/jena-roda-testsite.shp'
     #input_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/sentinel2_testdata'
-    input_dir = input('Please enter the path to your .safe directory or a directory containing multiple .safe directories: ')
+    input_dir = sys.argv[2]
     safe_dirs = get_img_dir(input_dir)
 
     if type(safe_dirs)==list:

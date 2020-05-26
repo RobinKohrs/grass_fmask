@@ -25,7 +25,7 @@ for key in by_date.keys():
         a = f.split("_")
         b = a[0:3]
         date = "_".join(b)[0:19]
-        if date == key:
+        if date == key and len(by_date[key] <= 2):
             dates.append(f)
     by_date[key] = dates
 
