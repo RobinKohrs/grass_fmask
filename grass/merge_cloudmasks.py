@@ -16,12 +16,18 @@ def reclass_to_file(cloudmask):
         reclass = clouds.read()
         profile = clouds.profile  # save metadata for file creation/writing
         reclass = binary_reclass(reclass) # reclassify values of fmask result
-        reclass_filename = cloudmask.replace('.img', '.tif') # create new filename
+        #TRY IF THESE CHANGES WORK:
+        #reclass_filename = cloudmask.replace('.img', '.tif') # create new filename
 
-        with rasterio.open(reclass_filename, 'w', **profile) as dst:
+        with rasterio.open(cloudmask, 'w', **profile) as dst:
             # Write reclassfied raster to disk
             dst.write(reclass)
-    return(reclass_filename)
+
+        # with rasterio.open(reclass_filename, 'w', **profile) as dst:
+        #     # Write reclassfied raster to disk
+        #     dst.write(reclass)
+    #return(reclass_filename)
+
 
 def binary_reclass(cloudmask):
     # reclassify values in order to only keep clouds (fmask value 2) and cloud shadow (fmask value 3)
@@ -93,11 +99,11 @@ def main():
             continue
 
         clmasks = [os.path.join(cloudmasks_dir, i) for i in clmasks]
-        cl_reclass = [reclass_to_file(i) for i in clmasks] # reclassify both masks
-        reclass_to_mergedvector(cl_reclass, merged_clouds_dir)
+        [reclass_to_file(i) for i in clmasks] # reclassify both masks
+        #cl_reclass = [reclass_to_file(i) for i in clmasks] # reclassify both masks
+        reclass_to_mergedvector(clmasks, merged_clouds_dir)
+        #reclass_to_mergedvector(cl_reclass, merged_clouds_dir)
 
-    print('Data was successfully merged for the following dates: ')
-    print(dates_unique)
 
 
 if __name__ == '__main__':
