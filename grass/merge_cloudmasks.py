@@ -22,6 +22,7 @@ def reclass_to_file(cloudmask):
         with rasterio.open(cloudmask, 'w', **profile) as dst:
             # Write reclassfied raster to disk
             dst.write(reclass)
+        print(cloudmask + ' was reclassified and saved to tif file.')
 
         # with rasterio.open(reclass_filename, 'w', **profile) as dst:
         #     # Write reclassfied raster to disk
@@ -57,10 +58,11 @@ def reclass_to_mergedvector(clouds_reclass, new_dir): # clouds_reclass is a list
         # create new filename to save merged vectordata into new_dir
         dir = clouds_reclass[0].split('/')
         names = dir[-1].split('_')
-        clouds_gp = '_'.join(names[:3])
-        clouds_gp += '.gpkg'
+        clouds_gp = names[2] + '_' + names[1]
+        clouds_gp += '_cloudmask_mergedvector.gpkg'
         # save to file
         clouds_vec.to_file(os.path.join(new_dir, clouds_gp), driver='GPKG')
+        print('Merged vector file ' + clouds_gp + ' was saved to file.')
 
 
 def binary_to_vector(binary_raster):
@@ -77,17 +79,22 @@ def main():
 
     # get all cloudmasks listed in input directory
     masks = os.listdir(cloudmasks_dir)
-    # get unique sensing dates
-    dates = []
+    masks_img = []
     for i in masks:
         if i.endswith('.img'):
+            masks_img.append(i)
+    print(masks_img)
+    # get unique sensing dates
+    dates = []
+    for i in masks_img:
             dates.append(i.split('_')[2])
     dates_unique = list(set(dates))
 
     # iterate over unique dates to merge cloudmasks
     for c in dates_unique:
         # get full paths of matching cloudmasks
-        clmasks = [i for i in masks if c in i]
+
+        clmasks = [i for i in masks_img if c in i]
 
         if len(clmasks) != 2:
             print('There are more than two cloudmasks of the same date available for ' + str(c) +
