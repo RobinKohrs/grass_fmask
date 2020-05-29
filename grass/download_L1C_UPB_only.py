@@ -1,4 +1,3 @@
-
 # Download corresponding L1C scenes for our L2A scenes
 
 import os
@@ -6,10 +5,11 @@ from sentinelsat.sentinel import SentinelAPI, read_geojson, geojson_to_wkt
 from datetime import date
 import numpy as np
 import zipfile
+import collections
 
 # list dates for L2A data in our STC
 L2Ascenes_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/S2MSI2A_cropped_20m_data'
-out_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/L1C_scenes'
+out_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/L1C_scenes/UPB'
 dates = os.listdir(L2Ascenes_dir)
 print('L1C Scenes for the following date will be searched and downloaded:')
 print(dates)
@@ -29,28 +29,29 @@ for d in dates:
                      producttype = 'S2MSI1C',
                      platformname = 'Sentinel-2')
 
-    print(type(products))
     products_df = api.to_dataframe(products)
-    cond1 = len(products_df.index) == 2
+
     cond2 = np.all(products_df.loc[:, 'relativeorbitnumber'].values == np.asarray([ro, ro]))
-    if cond1 and cond2:
-        print('There are two scenes of relative Orbit 65 available:')
-        print(products_df)
-        print('Scenes will be downloaded...')
-        api.download_all(products,
-                         directory_path= out_dir)
-    else:
-        print('For date ' + str(d) + ' conditions are not met. Following scenes are available:')
-        print(products_df)
-        print('Will continue with next date...')
+
+    if len(products_df.index) != 2:
+        print('There are more/less than two scenes available, will continue with next date...')
         continue
+    elif cond2:
+        UQB_products = products_df[products_df['title'].str.contains('UQB')]
+        uqb_key = UQB_products.index.astype(str)[0]
+        del products[uqb_key] # remove uqb products
+        print('start download..')
+        api.download_all(products, directory_path=out_dir)
+
 
 # unzip directories and remove zip files
 l1cs = os.listdir(out_dir)
 print(l1cs)
+
 for s in l1cs:
-    file = os.path.join(out_dir, s)
-    with zipfile.ZipFile(file, 'r') as f:
-        f.extractall(path= out_dir)
-    print(s + ' was successfully extracted.')
-    os.remove(file)
+    if s.endswith('zip'):
+        file = os.path.join(out_dir, s)
+        with zipfile.ZipFile(file, 'r') as f:
+            f.extractall(path= out_dir)
+        print(s + ' was successfully extracted.')
+        os.remove(file)
