@@ -55,7 +55,7 @@ def reclass_to_mergedvector(clouds_reclass, new_dir): # clouds_reclass is a list
         # create new filename to save merged vectordata into new_dir
         dir = clouds_reclass[0].split('/')
         names = dir[-1].split('_')
-        clouds_gp = '_'.join(names[:3])
+        clouds_gp = names[0] + '_' + names[2]
         clouds_gp += '_mergedvector.gpkg'
         # save to file
         clouds_vec.to_file(os.path.join(new_dir, clouds_gp), driver='GPKG')
