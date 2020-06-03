@@ -16,18 +16,13 @@ def reclass_to_file(cloudmask):
         reclass = clouds.read()
         profile = clouds.profile  # save metadata for file creation/writing
         reclass = binary_reclass(reclass) # reclassify values of fmask result
-        #TRY IF THESE CHANGES WORK:
-        #reclass_filename = cloudmask.replace('.img', '.tif') # create new filename
 
-        with rasterio.open(cloudmask, 'w', **profile) as dst:
+        reclass_path = cloudmask.replace('.img', '.tif') # create new filename for tif
+
+        with rasterio.open(reclass_path, 'w', **profile) as dst:
             # Write reclassfied raster to disk
             dst.write(reclass)
         print(cloudmask + ' was reclassified and saved to tif file.')
-
-        # with rasterio.open(reclass_filename, 'w', **profile) as dst:
-        #     # Write reclassfied raster to disk
-        #     dst.write(reclass)
-    #return(reclass_filename)
 
 
 def binary_reclass(cloudmask):
@@ -58,8 +53,8 @@ def reclass_to_mergedvector(clouds_reclass, new_dir): # clouds_reclass is a list
         # create new filename to save merged vectordata into new_dir
         dir = clouds_reclass[0].split('/')
         names = dir[-1].split('_')
-        clouds_gp = names[2] + '_' + names[1]
-        clouds_gp += '_cloudmask_mergedvector.gpkg'
+        clouds_gp = '_'.join(names[:3])
+        clouds_gp += '_mergedvector.gpkg'
         # save to file
         clouds_vec.to_file(os.path.join(new_dir, clouds_gp), driver='GPKG')
         print('Merged vector file ' + clouds_gp + ' was saved to file.')
@@ -107,10 +102,7 @@ def main():
 
         clmasks = [os.path.join(cloudmasks_dir, i) for i in clmasks]
         [reclass_to_file(i) for i in clmasks] # reclassify both masks
-        #cl_reclass = [reclass_to_file(i) for i in clmasks] # reclassify both masks
         reclass_to_mergedvector(clmasks, merged_clouds_dir)
-        #reclass_to_mergedvector(cl_reclass, merged_clouds_dir)
-
 
 
 if __name__ == '__main__':
