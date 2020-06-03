@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d000bba-7fba-4af0-9917-578cc952cea4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/grass/make_timestamps(ras+vec).py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grass/timestamps_martin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grass/timestamps_masks_martin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grass/merge_cloudmasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/grass/merge_cloudmasks.py" afterDir="false" />
     </list>

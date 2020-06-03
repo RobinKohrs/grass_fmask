@@ -24,6 +24,8 @@ def reclass_to_file(cloudmask):
             dst.write(reclass)
         print(cloudmask + ' was reclassified and saved to tif file.')
 
+        return(reclass_path)
+
 
 def binary_reclass(cloudmask):
     # reclassify values in order to only keep clouds (fmask value 2) and cloud shadow (fmask value 3)
@@ -101,8 +103,8 @@ def main():
             continue
 
         clmasks = [os.path.join(cloudmasks_dir, i) for i in clmasks]
-        [reclass_to_file(i) for i in clmasks] # reclassify both masks
-        reclass_to_mergedvector(clmasks, merged_clouds_dir)
+        reclassified = [reclass_to_file(i) for i in clmasks] # reclassify both masks
+        reclass_to_mergedvector(reclassified, merged_clouds_dir)
 
 
 if __name__ == '__main__':
