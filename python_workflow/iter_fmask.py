@@ -55,7 +55,7 @@ def main():
         else:
             safe = i.split(os.sep)[-2]
         names = safe.split("_")
-        out_name = "cloudmask_" + names[0] + "_" + names[2][0:8] + "_" + names[5] + "_.img"
+        out_name = "cloudmask_" + names[0] + "_" + names[2] + "_" + names[5] + "_.img"
         print(os.path.join(cloudmaskdir, out_name))
         cmdargs.output = os.path.join(cloudmaskdir, out_name)
         cmdargs.safedir = i
