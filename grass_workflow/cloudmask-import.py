@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
+
+#%module
+#% description: Import merged cloudmasks created with fmask
+#%end
+
+#%option G_OPT_M_DIR
+#% description: Name of directory where merged cloud masks as geopackage files are stored
+#%end
+
 #-----------------------------------------------------------------------------------------------------------
 # cloudmask_import.py
 #-----------------------------------------------------------------------------------------------------------
 # Programm imports all gpkg files (cloudmask) from dirpath.
-# You have to set your own dirpath to gpkg files.
 #-----------------------------------------------------------------------------------------------------------
 
 # Import modules
 import sys
 import os
-from subprocess import PIPE
-from grass.script import parser, parse_key_val
 import grass.script as grass
 
 
 def cleanup():
     pass
-
-# Set your own dirpath
-os.chdir("C:\Cloudmask")
 
 
 def import_gpkg(dirpath):
@@ -40,11 +43,11 @@ def import_gpkg(dirpath):
                                   overwrite = True)
 
 def main():
-    if len(sys.argv) == 1:
-            import_gpkg(os.getcwd())
-    else:
-        import_gpkg(sys.argv[1])
+
+    import_gpkg(options['input'])
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    options, flags = grass.parser()
+
+    sys.exit(main())
