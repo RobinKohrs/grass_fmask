@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d000bba-7fba-4af0-9917-578cc952cea4" name="Default Changelist" comment="">
+    <list default="true" id="877d25cc-e2c4-4fe3-95d3-5a70c686e8cf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/grass/ndvi_stc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grass/stc_creation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +46,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Python.download_L1C_UPB_only">
@@ -192,6 +198,10 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="368" y="23" width="543" height="777" key="#sentinelsat_download/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749185605" />
+    <state x="-888" y="296" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591786969452">
+      <screen x="-1280" y="23" width="1280" height="937" />
+    </state>
+    <state x="-888" y="296" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1280.23.1280.937/0.23.1280.777@-1280.23.1280.937" timestamp="1591786969452" />
     <state width="1361" height="221" key="GridCell.Tab.0.bottom" timestamp="1590769844450">
       <screen x="1280" y="137" width="1920" height="1057" />
     </state>
