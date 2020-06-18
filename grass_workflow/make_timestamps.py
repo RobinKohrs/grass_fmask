@@ -50,7 +50,11 @@ def main():
             ## workaround
             dd = d + timedelta(seconds=1)
 
+<<<<<<< HEAD
             vect = 'cloudmask_{}_mergedvector'.format(items[0])in
+=======
+            vect = 'cloudmask_{}_mergedvector'.format(items[0])
+>>>>>>> b2e1d58106a3f5aca3d8b703daead9610b5794d2
             Module('r.mask', vector=vect, overwrite=True)
             Module('g.remove', flags='f', type='vector', name=vect)
             Module('g.rename', raster=['MASK', vect])

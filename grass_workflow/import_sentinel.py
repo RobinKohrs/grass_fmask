@@ -1,26 +1,37 @@
 #!/usr/bin/env python3
+#%module
+#% description: Import cropped, merged and resampled S2MSL2A Sentinel-2 channels (B2 - B8, B8A, B11 and B12)
+#%end
+
+#%option G_OPT_M_DIR
+#% key: input_dir_ras
+#% description: Name of directory where sentinel 2 raster files are stored sorted by date
+#%end
+
+#%option G_OPT_F_INPUT
+#% key: input_aoi_vec
+#% description: Name of input vector file of AOI
+#%end
+
 #-----------------------------------------------------------------------------------------------------------
 # sentinel_import.py
 #-----------------------------------------------------------------------------------------------------------
-# Programm imports all tif files (uncropped merged S2MSL2A Sentinel-2 channels (B2 - B8, B8A, B11 and B12))
+# Programm imports all tif files (cropped merged S2MSL2A Sentinel-2 channels (B2 - B8, B8A, B11 and B12))
 # from dirpath and testsite (jena_roda_testsite).
-# You have to set your own dirpath to tif files and rename testsite.
 #-----------------------------------------------------------------------------------------------------------
+
+
+
 
 # Import modules
 import sys
 import os
 from subprocess import PIPE
-from grass.script import parser, parse_key_val
 import grass.script as grass
 
 
 def cleanup():
     pass
-
-# Set your own dirpath
-os.chdir("C:\Sentinel")
-
 
 def import_tifs(dirpath):
     for dirpath, dirname, filenames in os.walk(dirpath):
@@ -41,20 +52,22 @@ def import_tifs(dirpath):
                                   quiet = True,
                                   overwrite = True)
 
+def import_aoi_vector(aoi_vec):
     # Import testsite map (vector)
-    # You have to rename "jena-roda-testsite" into "jena_roda_testsite"
+    # You have to rename 'jena-roda-testsite' into 'jena_roda_testsite'
     grass.run_command('v.import',
-                      input = "C:\Sentinel\Site\jena_roda_testsite.shp",
-                      layer = "jena_roda_testsite",
-                      output = "jena_roda_testsite",
+                      input = aoi_vec,
+                      layer = 'jena_roda_testsite',
+                      output = 'jena_roda_testsite',
                       overwrite = True)
 
 def main():
-    if len(sys.argv) == 1:
-            import_tifs(os.getcwd())
-    else:
-        import_tifs(sys.argv[1])
+
+    import_tifs(options['input_dir_ras'])
+    import_aoi_vector(options['input_aoi_vec'])
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    options, flags = grass.parser()
+
+    sys.exit(main())
