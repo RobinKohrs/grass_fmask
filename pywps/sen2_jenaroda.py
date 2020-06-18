@@ -79,4 +79,4 @@ class Sen2_index(Process):
         )
         response.outputs['stats'].data = outstr
 
-        return "hi"
+        return response 
