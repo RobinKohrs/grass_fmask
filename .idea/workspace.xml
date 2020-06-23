@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877d25cc-e2c4-4fe3-95d3-5a70c686e8cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/grass/ndvi_stc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grass/stc_creation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +168,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9d000bba-7fba-4af0-9917-578cc952cea4" name="Default Changelist" comment="" />
+      <changelist id="877d25cc-e2c4-4fe3-95d3-5a70c686e8cf" name="Default Changelist" comment="" />
       <created>1587556395359</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -281,10 +279,11 @@
     <state x="149" y="50" key="SettingsEditor/1280.23.1680.1027/0.23.1280.777@0.23.1280.777" timestamp="1587834410998" />
     <state x="149" y="50" key="SettingsEditor/1280.23.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1587749339077" />
     <state x="1504" y="130" key="SettingsEditor/1280.93.1920.1057/0.23.1280.777@1280.93.1920.1057" timestamp="1588611051232" />
-    <state x="1780" y="438" key="com.intellij.ide.util.TipDialog" timestamp="1591165791773">
-      <screen x="1280" y="137" width="1920" height="1057" />
+    <state x="-1420" y="324" key="com.intellij.ide.util.TipDialog" timestamp="1592317828612">
+      <screen x="-1920" y="23" width="1920" height="1057" />
     </state>
     <state x="-1420" y="213" key="com.intellij.ide.util.TipDialog/-1920.-88.1920.1057/0.23.1280.777@-1920.-88.1920.1057" timestamp="1589531964799" />
+    <state x="-1420" y="324" key="com.intellij.ide.util.TipDialog/-1920.23.1920.1057/0.23.1280.777@-1920.23.1920.1057" timestamp="1592317828612" />
     <state x="333" y="244" key="com.intellij.ide.util.TipDialog/0.23.1280.777@0.23.1280.777" timestamp="1588674374146" />
     <state x="333" y="244" key="com.intellij.ide.util.TipDialog/1280.137.1920.1057/0.23.1280.777@0.23.1280.777" timestamp="1589986831721" />
     <state x="1780" y="438" key="com.intellij.ide.util.TipDialog/1280.137.1920.1057/0.23.1280.777@1280.137.1920.1057" timestamp="1591165791773" />
