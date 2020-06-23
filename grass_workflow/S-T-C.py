@@ -1,4 +1,19 @@
 #!/usr/bin/env python3
+
+#%module
+#% description: Create Space Time Datacubes for sentinel data and cloudmasks and calculate ndvi
+#%end
+
+#%option G_OPT_F_INPUT
+#% key: timestamps_raster
+#% description: Name of textfile with timestamps for sentinel bands
+#%end
+
+#%option G_OPT_F_INPUT
+#% key: timestamps_clouds
+#% description: Name of textfile with timestamps for cloudmasks
+#%end
+
 #-----------------------------------------------------------------------------------------------------------
 # S-T-C.py
 #-----------------------------------------------------------------------------------------------------------
@@ -8,11 +23,7 @@
 
 # Import modules
 import sys
-import os
-from subprocess import PIPE
-from grass.script import parser, parse_key_val
 import grass.script as grass
-
 
 def main():
     #Create S-T-C of rasters
@@ -39,16 +50,14 @@ def main():
     grass.run_command('t.register',
                       input = 'Sentinel2_Raster',
                       type = 'raster',
-                      # Link your timestamp for rasters
-                      file = '/home/robin/uni/semester2/geo450/git/grass_fmask/timestamps/raster_timestamps.txt',
+                      file = options['timestamps_raster'],
                       overwrite=True)
 
     # Registrate the Cloudmask S-T-C
     grass.run_command('t.register',
                       input = 'Sentinel2_Cloudmask',
                       type = 'raster',
-                      # Link your timestamp for cloudmasks
-                      file = '/home/robin/uni/semester2/geo450/git/grass_fmask/timestamps/vec_timestamps.txt',
+                      file=options['timestamps_clouds'],
                       overwrite=True)
 
     # extract all Sentinel-2 channels
@@ -136,11 +145,16 @@ def main():
 
     # example: Change Indice: NDVI Winter - Summer 2019
     grass.run_command('r.mapcalc',
-                      expression = '"ChangeIndice_NDVI_Summer_Winter_2019 = abs(ndvi_winter2019 - ndvi_summer2019)"')
+                      expression = 'ChangeIndice_NDVI_Summer_Winter_2019 = abs(ndvi_winter2019 - ndvi_summer2019)',
+                      overwrite = True)
 
     grass.run_command('r.colors',
                       color = 'ndvi',
                       map = 'ChangeIndice_NDVI_Summer_Winter_2019')
 
+
 if __name__ == "__main__":
-    main()
+    options, flags = grass.parser()
+
+    sys.exit(main())
+
