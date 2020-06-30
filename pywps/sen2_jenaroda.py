@@ -21,7 +21,7 @@ class Sen2_index(Process):
             version='0.1',
             title="Sentinel-2 NDVI Calculator",
             abstract='The Process will compute the average NDVI ' \
-                      'for a given time-preiod over an area near Jena',
+                      'for a given time-period over an area near Jena',
             profile='',
             inputs=inputs,
             outputs=outputs,
@@ -35,11 +35,12 @@ class Sen2_index(Process):
 
         d = datetime.strptime(date_str, '%Y-%m-%d')
         if d.year != 2019:
-            raise Exception("Only year 2019 allowed")
+            #raise Exception("Only year 2019 allowed")
+            pass
 
     def _handler(self, request, response):
         from subprocess import PIPE
-
+        print("IM HERE")
         import grass.script as gs
         from grass.pygrass.modules import Module
         from grass.exceptions import CalledModuleError
@@ -79,4 +80,4 @@ class Sen2_index(Process):
         )
         response.outputs['stats'].data = outstr
 
-        return response 
+        return None
