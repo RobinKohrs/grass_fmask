@@ -61,4 +61,25 @@
   url       = {https://doi.org/10.1016%2Fj.rse.2017.07.002},
 }
 
+@Article{qiu2019,
+  author    = {Shi Qiu and Zhe Zhu and Binbin He},
+  title     = {Fmask 4.0: Improved cloud and cloud shadow detection in Landsats 4{\textendash}8 and Sentinel-2 imagery},
+  journal   = {Remote Sensing of Environment},
+  year      = {2019},
+  volume    = {231},
+  pages     = {111205},
+  month     = {sep},
+  doi       = {10.1016/j.rse.2019.05.024},
+  publisher = {Elsevier {BV}},
+  url       = {https://doi.org/10.1016%2Fj.rse.2019.05.024},
+}
+
+@MastersThesis{laza2018,
+  author = {Adam Laza},
+  title  = {Process isolation in PyWPS framework},
+  school = {Czech technical university in Prague - Faculty of Civil engineering},
+  year   = {2018},
+  url    = {https://dspace.cvut.cz/bitstream/handle/10467/73987/F1-DP-2018-Laza-Adam-adam-laza-dp-2018.pdf?sequence=-1&isAllowed=y},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
