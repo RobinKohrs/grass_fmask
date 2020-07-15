@@ -11,7 +11,7 @@ api = SentinelAPI("roko93", "Rotole11", 'https://scihub.copernicus.eu/dhus')
 # dowload_scenes by date and polygon
 footprint = geojson_to_wkt(read_geojson("/home/robin/uni/semester2/geo450/git/grass_fmask/roi/jena_wgs84.geojson"))
 products = api.query(footprint,
-                     date = (date(2019,5,18), date(2020,5,18)),
+                     date = (date(2019,8,18), date(2020,1,18)),
                      producttype = 'S2MSI2A',
                      platformname = 'Sentinel-2',
                      relativeorbitnumber = 65,
@@ -53,5 +53,5 @@ print(df_new)
 
 
 
-api.download_all(products, directory_path = "/home/robin/geodata/rasterdata/satellitedata/sentinel2/geo450/jena_roda/S2MSI2A/")
+api.download_all(products, directory_path = "/home/robin/geodata/rasterdata/satellitedata/sentinel2/geo450/jena_roda/S2MSI2A_TEST/")
 
