@@ -82,4 +82,31 @@
   url    = {https://dspace.cvut.cz/bitstream/handle/10467/73987/F1-DP-2018-Laza-Adam-adam-laza-dp-2018.pdf?sequence=-1&isAllowed=y},
 }
 
+@Article{epick2007,
+  author    = {J{\'{a}}chym {\v{C}}epick{\'{y}}},
+  title     = {{PyWPS} 2.0.0: The presence and the future},
+  journal   = {Geoinformatics {FCE} {CTU}},
+  year      = {2007},
+  volume    = {2},
+  pages     = {61--64},
+  month     = {dec},
+  doi       = {10.14311/gi.2.8},
+  publisher = {Czech Technical University in Prague - Central Library},
+  url       = {https://doi.org/10.14311%2Fgi.2.8},
+}
+
+@Article{gebbert2017,
+  author    = {Sören Gebbert and Edzer Pebesma},
+  title     = {The {GRASS} {GIS} temporal framework},
+  journal   = {International Journal of Geographical Information Science},
+  year      = {2017},
+  volume    = {31},
+  number    = {7},
+  pages     = {1273--1292},
+  month     = {apr},
+  doi       = {10.1080/13658816.2017.1306862},
+  publisher = {Informa {UK} Limited},
+  url       = {https://doi.org/10.1080%2F13658816.2017.1306862},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
