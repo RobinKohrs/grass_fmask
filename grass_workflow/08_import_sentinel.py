@@ -14,19 +14,14 @@
 #%end
 
 #-----------------------------------------------------------------------------------------------------------
-# sentinel_import.py
-#-----------------------------------------------------------------------------------------------------------
 # Programm imports all tif files (cropped merged S2MSL2A Sentinel-2 channels (B2 - B8, B8A, B11 and B12))
 # from dirpath and testsite (jena_roda_testsite).
 #-----------------------------------------------------------------------------------------------------------
 
 
-
-
 # Import modules
 import sys
 import os
-from subprocess import PIPE
 import grass.script as grass
 
 
@@ -54,11 +49,8 @@ def import_tifs(dirpath):
 
 def import_aoi_vector(aoi_vec):
     # Import testsite map (vector)
-    # You have to rename 'jena-roda-testsite' into 'jena_roda_testsite'
     grass.run_command('v.import',
                       input = aoi_vec,
-                      layer = 'jena_roda_testsite',
-                      output = 'jena_roda_testsite',
                       overwrite = True)
 
 def main():
