@@ -1,5 +1,6 @@
 # Crop Sentinel-2 L1C scenes to AOI while maintaining .SAFE directory structure
 
+import sys
 import fiona
 import rasterio
 import rasterio.mask
@@ -24,7 +25,7 @@ def crop_raster(shape, raster):
     with rasterio.open(raster, 'w', **out_meta) as dest:
         dest.write(out_image)
 
-# append complete path to raster files and apply crop_raster function to all
+# appends complete path to raster files and apply crop_raster function to all
 def iter_crop(dir, shape):
     glob_pattern = os.path.join(dir, '*')
     files = glob(glob_pattern)
@@ -35,8 +36,9 @@ def iter_crop(dir, shape):
 
     for f in files:
         crop_raster(shape, f)
+    print('Successfully cropped .SAFE directory.')
 
-# retrieve complete path to image data within .SAFE directories
+# retrieves complete path to image data within .SAFE directories
 def get_img_dir(input_dir):
     if input_dir.endswith('.SAFE'):
         img_dir = dir_hop(input_dir)
@@ -53,23 +55,19 @@ def get_img_dir(input_dir):
 
     return img_dir
 
-# hop through .SAFE directories to folder with 20m resolution data
+# hops through .SAFE directory to folder with image data
 def dir_hop(safe_dir):
     gran_folder = os.path.join(safe_dir, 'GRANULE')
     sub_folder = os.listdir(gran_folder)[0]
-    dirs_to_remove = [x for x in os.listdir(os.path.join(gran_folder, subfolder) if "R20m" no in x)]
-    print(dirs_to_remove)
-    return "END"
-    r20 = os.path.join(gran_folder, sub_folder, "R20m", 'IMG_DATA')
-    return r20
+    img_folder = os.path.join(gran_folder, sub_folder, 'IMG_DATA')
+    return img_folder
 
 
-def main():
-    shape = input('Please enter the path to the shapefile of your AOI: ')
-    input_dir = input('Please enter the path to your .safe directory or a directory containing multiple .safe directories: ')
-    safe_dirs = get_img_dir(input_dir)
+def main(shape, input_dir):
 
-    if type(safe_dirs)==list:
+    safe_dirs = get_img_dir(input_dir) # retrieve paths to image directories
+
+    if type(safe_dirs) == list: # check if one or more .SAFE directories are given and iterate over all if necessary
         for sd in safe_dirs:
             iter_crop(sd, shape)
     else:
@@ -77,5 +75,6 @@ def main():
 
 
 if __name__ == '__main__':
-
-    main()
+    input_dir = sys.argv[1] # first argument in commandline is path to .SAFE directories
+    shape = sys.argv[2]  # second argument in commandline is path to aoi shapefile
+    main(shape, input_dir)

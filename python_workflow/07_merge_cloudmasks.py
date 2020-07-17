@@ -10,6 +10,7 @@ from shapely.geometry import shape, MultiPolygon
 import geopandas as gpd
 
 
+# creates a binary raster containing only clouds and cloud shadow and saves it as a .tif file
 def reclass_to_file(cloudmask):
 
     with rasterio.open(cloudmask) as clouds:
@@ -36,7 +37,8 @@ def binary_reclass(cloudmask):
     return cloudmask
 
 
-def reclass_to_mergedvector(clouds_reclass, new_dir): # clouds_reclass is a list of the two reclassified rasters of one date
+def reclass_to_mergedvector(clouds_reclass, new_dir):
+    # clouds_reclass is a list of the two reclassified rasters of one date
 
     with rasterio.open(clouds_reclass[0]) as clouds_rc1, \
             rasterio.open(clouds_reclass[1]) as clouds_rc2:
@@ -48,11 +50,11 @@ def reclass_to_mergedvector(clouds_reclass, new_dir): # clouds_reclass is a list
 
         clouds_gpd = gpd.GeoDataFrame(geometry=[cl_shp1, cl_shp2]) # convert to geopanda dataframe
 
-        geoms = clouds_gpd.geometry.unary_union # merge/unite polygons of overlapping areas
+        geoms = clouds_gpd.geometry.unary_union # merge/unite polygons of overlapping areas and avoid duplicates
         clouds_vec = gpd.GeoDataFrame(geometry=[geoms])
         clouds_vec.crs = clouds_crs
 
-        # create new filename to save merged vectordata into new_dir
+        # create new filename to save merged vector data into new_dir
         dir = clouds_reclass[0].split('/')
         names = dir[-1].split('_')
         clouds_gp = names[0] + '_' + names[2]
@@ -62,14 +64,15 @@ def reclass_to_mergedvector(clouds_reclass, new_dir): # clouds_reclass is a list
         print('Merged vector file ' + clouds_gp + ' was saved to file.')
 
 
+# converts binary raster to vector data keeping only contiguous areas with value 1
 def binary_to_vector(binary_raster):
     vector = rasterio.features.dataset_features(binary_raster, as_mask=True, geographic=False) # vectorize raster data
     shapes = MultiPolygon([shape(feature['geometry']).buffer(0) for feature in vector]) # extract polygon geometries
     return shapes
 
 
-def main():
-    cloudmasks_dir = sys.argv[1]
+def main(cloudmasks_dir):
+
     # create new directory for merged cloudmasks
     merged_clouds_dir = os.path.join(cloudmasks_dir, 'merged_cloudmasks')
     os.makedirs(merged_clouds_dir, exist_ok=True)
@@ -89,24 +92,25 @@ def main():
 
     # iterate over unique dates to merge cloudmasks
     for c in dates_unique:
-        # get full paths of matching cloudmasks
 
+        # get full paths of matching cloudmasks
         clmasks = [i for i in masks_img if c in i]
 
         if len(clmasks) != 2:
             print('There are more than two cloudmasks of the same date available for ' + str(c) +
-                  '. Please check the data. We will go on with the next date.')
+                  '. Please check the data. Will continue with the next date.')
             continue
         elif len(clmasks) < 2:
             print('There are less than two cloudmasks of the same date available for ' + str(c) +
-                  '. Please check the data. We will go on with the next date.')
+                  '. Please check the data. Will continue with the next date.')
             continue
 
-        clmasks = [os.path.join(cloudmasks_dir, i) for i in clmasks]
+        clmasks = [os.path.join(cloudmasks_dir, i) for i in clmasks] # create full paths
         reclassified = [reclass_to_file(i) for i in clmasks] # reclassify both masks
-        reclass_to_mergedvector(reclassified, merged_clouds_dir)
+        reclass_to_mergedvector(reclassified, merged_clouds_dir) # convert to vector and merge
 
 
 if __name__ == '__main__':
+    cloudmasks_dir = sys.argv[1]
     main()
 

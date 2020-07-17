@@ -9,7 +9,7 @@ from fmask.cmdline.sentinel2Stacked import makeStackAndAngles, checkAnglesFile
 
 def main():
 
-    # make directory for cloudmasks
+    # create directory for cloudmasks
     if _input.endswith(".SAFE/"):
         paths = _input.split(os.sep)
         cloudmaskdir = os.path.join(os.sep, *paths[0:-2], "cloudmasks")
@@ -104,7 +104,7 @@ def main():
 
 
 if __name__ == '__main__':
-    _input = sys.argv[1]
+    _input = sys.argv[1] # .SAFE directory or directory with several L1C .SAFE directories
     if _input.endswith(".SAFE/") or _input.endswith(".SAFE"):
         safe_dir_file = _input
         safe_dir = []
