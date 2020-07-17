@@ -1,4 +1,4 @@
-# Script to crop sentinel scene to AOI while maintaining .safe directory structure
+# Crop Sentinel-2 L1C scenes to AOI while maintaining .SAFE directory structure
 
 import fiona
 import rasterio
@@ -7,7 +7,7 @@ import os
 from glob import glob
 import warnings
 
-
+# crops given raster to the extent of a given shapefile and overwrites original jpeg2 file
 def crop_raster(shape, raster):
     with fiona.open(shape, 'r') as shapefile:
         shapes = [feature['geometry'] for feature in shapefile]
@@ -24,6 +24,7 @@ def crop_raster(shape, raster):
     with rasterio.open(raster, 'w', **out_meta) as dest:
         dest.write(out_image)
 
+# append complete path to raster files and apply crop_raster function to all
 def iter_crop(dir, shape):
     glob_pattern = os.path.join(dir, '*')
     files = glob(glob_pattern)
@@ -35,9 +36,8 @@ def iter_crop(dir, shape):
     for f in files:
         crop_raster(shape, f)
 
-
+# retrieve complete path to image data within .SAFE directories
 def get_img_dir(input_dir):
-    # ? add error if directory does not exist
     if input_dir.endswith('.SAFE'):
         img_dir = dir_hop(input_dir)
     else:
@@ -53,6 +53,7 @@ def get_img_dir(input_dir):
 
     return img_dir
 
+# hop through .SAFE directories to folder with 20m resolution data
 def dir_hop(safe_dir):
     gran_folder = os.path.join(safe_dir, 'GRANULE')
     sub_folder = os.listdir(gran_folder)[0]
@@ -65,8 +66,6 @@ def dir_hop(safe_dir):
 
 def main():
     shape = input('Please enter the path to the shapefile of your AOI: ')
-    #shape = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/jena-roda-testsite.shp'
-    #input_dir = '/Users/veronikagrupp/Documents/UNIVERSIDAD/Jena/wise_1920/grassgis/data/sentinel2_testdata'
     input_dir = input('Please enter the path to your .safe directory or a directory containing multiple .safe directories: ')
     safe_dirs = get_img_dir(input_dir)
 
@@ -78,4 +77,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
