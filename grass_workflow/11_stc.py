@@ -61,7 +61,7 @@ def main():
                       overwrite=True)
 
     # Extract all relevant Sentinel-2 channels (B2, B3, B4, B5, B6, B7, B8, B8A, B11 and B12).
-    # Channel B1, B9 and B10 are not important for calculating vegetation indices later
+    # Channel B1, B9 and B10 are not important for calculating vegetation indices later 
     # (rather for atmospherical correction).
     list = [2,3,4,5,6,7,8,11,12]
     for i in list:
