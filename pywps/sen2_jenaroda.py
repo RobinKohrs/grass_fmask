@@ -40,7 +40,6 @@ class Sen2_index(Process):
 
     def _handler(self, request, response):
         from subprocess import PIPE
-        print("IM HERE")
         import grass.script as gs
         from grass.pygrass.modules import Module
         from grass.exceptions import CalledModuleError

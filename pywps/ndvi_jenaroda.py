@@ -2,6 +2,11 @@ import os
 
 from pywps import Process, LiteralInput, LiteralOutput
 
+#######
+# Test URL
+# http://localhost:5000/wps?request=Execute&service=WPS&identifier=ndvi2&version=1.0.0&datainputs=start=2019-07-01;end=2019-10-01;start2=2019-10-01;end2=2019-12-01
+######
+
 __author__ = 'Robin'
 
 class ndvi_index(Process):
@@ -17,12 +22,14 @@ class ndvi_index(Process):
 
         ]
         outputs = [LiteralOutput('stats', 'Computed ndvi statistics',
+                                 data_type='string'),
+        		   LiteralOutput('stats2', 'Computed ndvi statistics',
                                  data_type='string')
         ]
 
         super(ndvi_index, self).__init__(
             self._handler,
-            identifier='ndvi',
+            identifier='ndvi2',
             version='0.1',
             title="Sentinel-2 NDVI Calculator",
             abstract='The Process will compute the average NDVI ' \
@@ -45,7 +52,6 @@ class ndvi_index(Process):
 
     def _handler(self, request, response):
         from subprocess import PIPE
-        print("IM HERE")
         import grass.script as gs
         from grass.pygrass.modules import Module
         from grass.exceptions import CalledModuleError
@@ -104,9 +110,10 @@ class ndvi_index(Process):
         stats = gs.parse_key_val(ret.outputs.stdout)
         stats2 = gs.parse_key_val(ret2.outputs.stdout)
         
-        outstr = 'Min1: {0:.1f};Max1: {1:.1f};Mean1: {2:.4f}; \n Min2 {0:.1f};Max2: {1:.1f}; Mean2: {2:.4f}'.format(
-            float(stats['min']), float(stats['max']), float(stats['mean']), float(stats2["min"]), float(stats2["max"]), float(stats2["mean"]))
+        outstr = 'Min1: {0:.1f};Max1: {1:.1f};Mean1: {2:.4f}; Standard-Deviation: {3: 3f}'.format(float(stats['min']), float(stats['max']), float(stats['mean']), float(stats['stddev']))
+        outstr2 = 'Min2 {0:.1f};Max2: {1:.1f}; Mean2: {2:.4f}; Standard-Deviation-2: {3: 3f}'.format(float(stats2["min"]), float(stats2["max"]), float(stats2["mean"]), float(stats2['stddev']))
 
         response.outputs['stats'].data = outstr
+        response.outputs['stats2'].data = outstr2
 
         return None
