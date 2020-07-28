@@ -36,7 +36,7 @@ def main():
     # Calculate SAVI, when there are no clouds, with L = 0.5
     grass.run_command('t.rast.mapcalc',
                       input= options['raster'],
-                      expression = 'savi = if(!isnull(cldmsk), null(), float(1.5* ((b8-b4) / ( b8+b4+0.5))))',
+                      expression = 'savi = if(!isnull(cldmsk), null(), (1.5*(float((b8-b4) / (b8+b4+0.5))))',
                       output = 'savi',
                       basename = 'savi',
                       nprocs = '3',
