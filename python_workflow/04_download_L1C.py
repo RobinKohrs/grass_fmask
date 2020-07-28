@@ -5,6 +5,7 @@ from sentinelsat.sentinel import SentinelAPI, read_geojson, geojson_to_wkt
 from datetime import date
 import numpy as np
 import zipfile
+import sys
 
 # path to directory where downloaded L2A scenes are stored
 L2Ascenes_dir = sys.argv[1]
@@ -14,12 +15,13 @@ user = input('Enter your Copernicus Open Access Hub Username: ')
 password = input('Password: ')
 api = SentinelAPI(user, password, 'https://scihub.copernicus.eu/dhus')
 # path to area of interest defined by user on the command line
+# Must be geojson in WGS84
 aoi = sys.argv[2]
 footprint = geojson_to_wkt(read_geojson(aoi)) # define aoi for search of scenes
 ro = 65 # set relative orbit number
 
 # list dates of L2A data
-dates = os.listdir(L2Ascenes_dir)
+dates = [x for x in os.listdir(L2Ascenes_dir) if x.startswith("2020") or x.startswith("2019")]
 print('L1C Scenes for the following date will be searched and downloaded:')
 print(dates)
 

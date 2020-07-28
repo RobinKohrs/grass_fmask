@@ -122,7 +122,7 @@ if __name__ == '__main__':
             print("in the provided path are no .safe directories")
             sys.exit(1)
         else:
-            safe_dir = [_input + x for x in os.listdir(_input) if x.endswith(".SAFE")]
+            safe_dir = [os.path.join(_input, x) for x in os.listdir(_input) if x.endswith(".SAFE")]
             print("for the following directories a cloudmask will be computed")
             for i in safe_dir:
                 print(i)

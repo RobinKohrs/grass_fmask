@@ -112,5 +112,5 @@ def main(cloudmasks_dir):
 
 if __name__ == '__main__':
     cloudmasks_dir = sys.argv[1]
-    main()
+    main(cloudmasks_dir)
 
